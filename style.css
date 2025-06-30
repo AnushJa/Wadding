@@ -152,7 +152,14 @@ section {
     color: var(--dark);
     position: relative;
 }
-
+.date-text-style {
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: var(--dark);
+    position: relative;
+}
 /* Our Story */
 .our-story {
     background-color: var(--withe);

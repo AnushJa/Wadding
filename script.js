@@ -2,15 +2,30 @@
 const weddingDate = new Date("2025-08-07T15:00:00");
 
 function updateCountdown() {
-    const now = new Date();
+  const now = new Date();
     const diff = weddingDate - now;
+    const titleEl = document.getElementById("countdown-title");
 
     if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "<strong>Ժամանակը լրացավ ⏰</strong>";
-        document.getElementById("countdown-message").textContent = "Շնորհավորում ենք մեզ՝ հարսանիքի օրը հասել է!";
-        return;
+  
+        titleEl.textContent = "Հարսանիքից անցել է";
+
+        const passed = now - weddingDate;
+        const daysPassed = Math.floor(passed / (1000 * 60 * 60 * 24));
+        const hoursPassed = Math.floor((passed / (1000 * 60 * 60)) % 24);
+        const minutesPassed = Math.floor((passed / (1000 * 60)) % 60);
+        const secondsPassed = Math.floor((passed / 1000) % 60);
+
+        document.getElementById("days").textContent = daysPassed;
+        document.getElementById("hours").textContent = hoursPassed;
+        document.getElementById("minutes").textContent = minutesPassed;
+        document.getElementById("seconds").textContent = secondsPassed;
+        
+       return;
     }
 
+    titleEl.textContent = "Հարսանիքին մնաց";
+    
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((diff / (1000 * 60)) % 60);

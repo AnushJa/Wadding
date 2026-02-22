@@ -1,4 +1,4 @@
-* {
+ *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -27,8 +27,8 @@ body {
 }
 
 /* Header Styles */
-header {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.pinimg.com/736x/ca/7e/6b/ca7e6b98af9dcf9270039bc275ea0bd4.jpg') center/cover no-repeat;
+ header{
+   
     height: 100vh;
     color: white;
     display: flex;
@@ -37,6 +37,13 @@ header {
     justify-content: center;
     text-align: center;
     position: relative;
+}
+
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.pinimg.com/736x/ca/7e/6b/ca7e6b98af9dcf9270039bc275ea0bd4.jpg') center/cover no-repeat;
+}
+.aboutheader{
+     background: url('Images/Image1.jpg') no-repeat center center/cover;
 }
 
 .couple-names {
@@ -317,6 +324,44 @@ footer {
 
 .social-icons a:hover {
     color: var(--gold);
+}
+
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 6px 8px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6px);
+}
+
+/* Button style */
+.language-switcher button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 14px;
+    background: transparent;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.language-switcher button:hover {
+    background: #e8cfa9;
+    color: #000;
+}
+
+.language-switcher button.active {
+    background: #c8a165;
+    color: #fff;
 }
 
 /* Responsive Design */

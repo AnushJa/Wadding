@@ -1,52 +1,136 @@
-// Countdown Timer
-const weddingDate = new Date("2025-08-07T15:00:00");
+/* ================================
+   WEDDING DATE
+================================ */
+const weddingDate = new Date("2026-06-05T14:00:00");
 
-function updateCountdown() {
-  const now = new Date();
-    const diff = weddingDate - now;
-    const titleEl = document.getElementById("countdown-title");
+/* ================================
+   TRANSLATIONS
+================================ */
 
-    if (diff <= 0) {
-  
-        titleEl.textContent = "Հարսանիքից անցել է";
+const translations = {
+  de: {
+    greeting: "Liebe Gäste",
+    story: "Mit großer Freude laden wir Sie herzlich zu unserer Hochzeit ein. Wir würden uns sehr freuen, diesen besonderen Tag gemeinsam mit Ihnen zu feiern.",
+    date: "05 Juni 2026",
+    countdown_before: "Bis zur Hochzeit",
+    countdown_after: "Seit der Hochzeit vergangen",
+    days: "Tage",
+    hours: "Stunden",
+    minutes: "Minuten",
+    seconds: "Sekunden",
+    program: "Tagesprogramm",
+    weekday: "Freitag, 05. Juni 2026",
+    ceremony: "Trauung",
+    venue: "Zeremonie",
+    map: "Wegbeschreibung",
+    footer: "Mit großer Freude erwarten wir Sie",
+    location: "05. Juni 2026 | Hamburg, Deutschland"
+  },
 
-        const passed = now - weddingDate;
-        const daysPassed = Math.floor(passed / (1000 * 60 * 60 * 24));
-        const hoursPassed = Math.floor((passed / (1000 * 60 * 60)) % 24);
-        const minutesPassed = Math.floor((passed / (1000 * 60)) % 60);
-        const secondsPassed = Math.floor((passed / 1000) % 60);
+  hy: {
+    greeting: "Հարգելի հյուրեր",
+    story: "Սիրով հրավիրում ենք Ձեզ մեր հարսանիքին և շատ ուրախ կլինենք, եթե այս երջանիկ օրը անցկացնեք մեզ հետ՝ մեզ նվիրելով Ձեր ներկայությունը։",
+    date: "05 Հունիս 2026",
+    countdown_before: "Հարսանիքին մնցել է",
+    countdown_after: "Հարսանիքից անցել է",
+    days: "Օր",
+    hours: "Ժամ",
+    minutes: "Րոպե",
+    seconds: "Վայրկյան",
+    program: "Օրվա ծրագիր",
+    weekday: "Ուրբաթ, 05 Հունիս 2026",
+    ceremony: "Պսակադրություն",
+    venue: "Հանդիսություն",
+    map: "Ինչպես հասնել",
+    footer: "Սիրով կսպասենք Ձեզ",
+    location: "05 Հունիս 2026 | Համբուրգ, Գերմանիա"
+  }
+};
 
-        document.getElementById("days").textContent = daysPassed;
-        document.getElementById("hours").textContent = hoursPassed;
-        document.getElementById("minutes").textContent = minutesPassed;
-        document.getElementById("seconds").textContent = secondsPassed;
-        
-       return;
+/* ================================
+   LANGUAGE HANDLING
+================================ */
+let currentLang = localStorage.getItem("siteLanguage") || "de";
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem("siteLanguage", lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
     }
+  });
 
-    titleEl.textContent = "Հարսանիքին մնաց";
-    
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+  // Active button styling
+  document.querySelectorAll(".language-switcher button").forEach(btn => {
+    btn.classList.remove("active");
+  });
 
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
+  const activeBtn = document.querySelector(
+    `.language-switcher button[onclick="setLanguage('${lang}')"]`
+  );
+  if (activeBtn) activeBtn.classList.add("active");
+
+  updateCountdown(); // refresh countdown text
 }
 
-// Smooth scrolling for navigation
+/* ================================
+   COUNTDOWN TIMER
+================================ */
+function updateCountdown() {
+  const now = new Date();
+  const diff = weddingDate - now;
+  const titleEl = document.getElementById("countdown-title");
+
+  if (!titleEl) return;
+
+  if (diff <= 0) {
+    titleEl.textContent = translations[currentLang].countdown_after;
+
+    const passed = now - weddingDate;
+    document.getElementById("days").textContent =
+      Math.floor(passed / (1000 * 60 * 60 * 24));
+    document.getElementById("hours").textContent =
+      Math.floor((passed / (1000 * 60 * 60)) % 24);
+    document.getElementById("minutes").textContent =
+      Math.floor((passed / (1000 * 60)) % 60);
+    document.getElementById("seconds").textContent =
+      Math.floor((passed / 1000) % 60);
+
+    return;
+  }
+
+  titleEl.textContent = translations[currentLang].countdown_before;
+
+  document.getElementById("days").textContent =
+    Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("hours").textContent =
+    Math.floor((diff / (1000 * 60 * 60)) % 24);
+  document.getElementById("minutes").textContent =
+    Math.floor((diff / (1000 * 60)) % 60);
+  document.getElementById("seconds").textContent =
+    Math.floor((diff / 1000) % 60);
+}
+
+/* ================================
+   SMOOTH SCROLLING
+================================ */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
 });
 
-// Initialize countdown
+/* ================================
+   INITIALIZE
+================================ */
+setLanguage(currentLang);
 updateCountdown();
 setInterval(updateCountdown, 1000);

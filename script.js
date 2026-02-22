@@ -1,7 +1,7 @@
 /* ================================
    WEDDING DATE
 ================================ */
-const weddingDate = new Date("2026-06-05T14:00:00");
+const weddingDate = new Date("2025-08-07T13:00:00");
 
 /* ================================
    TRANSLATIONS

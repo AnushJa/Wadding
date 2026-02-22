@@ -1,37 +1,18 @@
 /* ================================
    WEDDING DATE
 ================================ */
-const weddingDate = new Date("2025-08-07T13:00:00");
+const weddingDate = new Date("2025-08-07T15:00:00");
 
 /* ================================
    TRANSLATIONS
 ================================ */
 
 const translations = {
-  de: {
-    greeting: "Liebe Gäste",
-    story: "Mit großer Freude laden wir Sie herzlich zu unserer Hochzeit ein. Wir würden uns sehr freuen, diesen besonderen Tag gemeinsam mit Ihnen zu feiern.",
-    date: "05 Juni 2026",
-    countdown_before: "Bis zur Hochzeit",
-    countdown_after: "Seit der Hochzeit vergangen",
-    days: "Tage",
-    hours: "Stunden",
-    minutes: "Minuten",
-    seconds: "Sekunden",
-    program: "Tagesprogramm",
-    weekday: "Freitag, 05. Juni 2026",
-    ceremony: "Trauung",
-    venue: "Zeremonie",
-    map: "Wegbeschreibung",
-    footer: "Mit großer Freude erwarten wir Sie",
-    location: "05. Juni 2026 | Hamburg, Deutschland"
-  },
-
   hy: {
     greeting: "Հարգելի հյուրեր",
     story: "Սիրով հրավիրում ենք Ձեզ մեր հարսանիքին և շատ ուրախ կլինենք, եթե այս երջանիկ օրը անցկացնեք մեզ հետ՝ մեզ նվիրելով Ձեր ներկայությունը։",
     date: "05 Հունիս 2026",
-    countdown_before: "Հարսանիքին մնցել է",
+    countdown_before: "Հարսանիքին մնացել է",
     countdown_after: "Հարսանիքից անցել է",
     days: "Օր",
     hours: "Ժամ",
@@ -50,7 +31,7 @@ const translations = {
 /* ================================
    LANGUAGE HANDLING
 ================================ */
-let currentLang = localStorage.getItem("siteLanguage") || "de";
+let currentLang = localStorage.getItem("siteLanguage") || "hy";
 
 function setLanguage(lang) {
   currentLang = lang;
